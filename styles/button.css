@@ -1,0 +1,21 @@
+.btnn{
+    background:#1E90FF;
+    border:none;
+    outline:none;
+    height:35px;
+    width:35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right:20px;
+    bottom:20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btnn.asba{
+    opacity: 0;
+    visibility: hidden;
+}

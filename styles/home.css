@@ -1,0 +1,171 @@
+#home{
+    background-image: url("../images/home.png");
+    background-repeat: no-repeat;
+    background-size: 100% 70%;
+    min-height: 80vh;
+    padding:4rem 10vw;
+}
+
+.wrap{
+    width: 50%;
+    display: flex;
+}
+
+.wrap input{
+    width:100%;
+    border-radius: 10px;
+}
+
+#home img{
+    position: absolute;
+    width: 100%;
+}
+
+#home .text-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home .text-wrapper h2{
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+    text-align: center;
+}
+
+#home .text-wrapper h1{
+    color:#1E90FF;
+    font-size: 3.5rem;
+    text-align: center;
+    width: 70%;
+    margin-bottom: 1rem;
+}
+
+#home .text-wrapper h3{
+    font-weight: 400;
+    color:white;
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+#home .containerr{
+    background:white;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+
+#home .containerr .line{
+    height:20px;
+    background:#1E90FF;
+}
+
+#home .containerr form{
+    padding:2rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap:.5rem;
+}
+
+#home .containerr form input{
+    border:none;
+    outline:none;
+    background:#f1f1f1;
+    padding:1rem;
+}
+
+#home .containerr form button{
+    background:#1E90FF;
+    border:none;
+    outline:none;
+    color:white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .5s;
+    padding:1rem 2rem;
+    width:50%;
+    border-radius: 10px;
+}
+
+#home .containerr form button:hover{
+    transform: scale(1.03);
+}
+
+#home .containerr form > div{
+    width:100%;
+    display: flex;
+    gap:.5rem;
+}
+
+#home .containerr form > div > input{
+    width:50%;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:670px){
+    #home .containerr form{
+        padding:1rem;        
+    }
+
+    #home{
+        padding:2rem 10vw;
+    }
+
+    #home .containerr form{
+        padding-bottom: 0rem !important;
+    }
+    
+
+    #home .containerr form > div{
+        width:100% !important;
+        display: flex;
+        flex-direction: column;
+        gap:.5rem;
+    }
+
+    #home .containerr form > div > *{
+        width:100% !important;
+    }
+
+    .top , .middle , .bottom{
+        overflow: hidden;
+    }
+
+    #home .containerr form button{
+        font-size: .85rem;
+        padding:1rem 2rem;
+    }
+
+    #home button{
+        padding: 1rem;
+    }
+
+    #home .text-wrapper h2{
+        font-size: 1rem;
+    }
+
+    #home .text-wrapper h1{
+        font-size: 1.5rem;
+        width: 100%;
+    }
+
+    #home .text-wrapper h3{
+        font-size: .9rem;
+    }
+}

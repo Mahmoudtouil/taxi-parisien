@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Import Mapbox GL JS -->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+
+    <!-- Import Mapbox GL Directions -->
+    <script src="fn.js"></script>
+    <link rel="stylesheet" href="fn.css" type="text/css" />
+
+    <!-- Import Turf & Polyline -->
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-polyline/1.1.1/polyline.js"></script>
+
+    <title>Taxi Parisien</title>
+    <link rel="stylesheet" href="./styles/index.css">
+
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="./styles/services.css">
+    <link rel="stylesheet" href="./styles/home.css">
+
+    <link rel="stylesheet" href="./styles/contact.css">
+    <link rel="stylesheet" href="./styles/about.css">
+
+    <link rel="stylesheet" href="./styles/button.css">
+    <link rel="stylesheet" href="./styles/alert.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <!-- favicon img -->
+    <link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png" />
+
+    <!--style.css-->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!--responsive.css-->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+
+    <link rel="stylesheet" href="./assets/css/a.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("sR_PEsCtOx9ByxbmS");
+        })();
+    </script>
+
+    <script defer src="./script.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+        <div class="logo">
+            Taxi <span>Parisien</span>
+        </div>
+        <ul class="desktop-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <ul class="mobile-list hidden">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="bars" onclick="hamburgerBtnHandler()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- Home -->
+
+    <section id="home">
+        <div class="text-wrapper">
+            <h2>Commandez votre Taxi en appelant:</h2>
+            <h1>06 44 11 72 49</h1>
+            <h1>06 35 59 92 61</h1>
+            <h3>ou en remplissant le formulaire ci-dessous</h3>
+        </div>
+        <div class="containerr">
+            <form>
+                <div class="top">
+                    
+                    <input autoComplete="off" type="text" required="required" class="nom" placeholder="Nom et prénom" />
+                    
+                    <input autoComplete="off" type="text" required="required" class="tel" placeholder="Numéro télephone" />
+                </div>
+                <div class="middle">
+                    <input autoComplete="off" required="required" class="date-time" placeholder="Date et temps" type="datetime-local" />
+                    <input autoComplete="off" required="required" class="tarrif" placeholder="Tarif" />
+                </div>
+                <div class="bottom">
+                    <div class="wrap">
+                        <input type="email" required="required" class="te" placeholder="Email" />
+                    </div>
+                    <button class="reserver">Réserver</button>
+                </div>
+            </form>
+
+
+
+            <div class="mapppper">
+                <div class="single-travel-boxes">
+                    <div id="desc-tabs" class="desc-tabs">
+                        <div class="left">
+                            <!-- estimation -->
+
+                            <form name="f" id="ff" action="https://formsubmit.co/mahmoudtouil9@gmail.com" method="POST"
+                                target="hiddenFrame">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="hidden" name="_subject" value="Taxi Parisien">
+                                <input type="hidden" name="_template" value="table">
+
+                                <input type="hidden" id="org" name="Adresse de depart :">
+                                <input type="hidden" id="des" name="Adresse d'arrivée :">
+
+                                <div class="dist">
+                                    <label>Distance :</label><br>
+                                    <label id="dis" style="color:#555;"></label><br>
+                                </div>
+
+                                <input type="hidden" id="d" name="Distance :" required>
+
+                                <div class="t2">
+                                    <label>Temps :</label><br>
+                                    <input id="tmp" style="color:#555;"></input><br>
+                                </div>
+                                <input type="hidden" id="t" name="Temps :" required>
+
+                                <div class="tarif">
+                                    <label>Tarif :</label><br>
+                                    <label id="m" style="color:#555;"></label><br>
+                                </div>
+                                <input type="hidden" id="tf" name="Tarif :" required>
+
+                                <button class="submit-btn" type="submit">Réserver</button>
+                            </form>
+
+                            <!-- estimation -->
+                        </div>
+
+                        <div class="right">
+                            <!--directions-->
+                            <div id="dir"></div>
+                            <!--  the map -->
+                            <div id='map'></div>
+                            <style>
+                                .hide {
+                                    position: absolute;
+                                    top: -1px;
+                                    left: -1px;
+                                    width: 1px;
+                                    height: 1px;
+                                    color: transparent;
+                                }
+                            </style>
+
+                            <iframe name="hiddenFrame" class="hide"></iframe>
+                        </div>
+                        <!-- estimation script -->
+                        <script src="est.js">
+
+                        </script>
+                        <!-- /estimation script -->
+                    </div><!--/.desc-tabs-->
+                </div><!--/.single-travel-box-->
+            </div><!--/.col-->
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- Services -->
+
+    <section id="services">
+        <div class="header">
+            Our Services
+        </div>
+        <div class="grid">
+            <div class="service">
+                <i class="fa-solid fa-car-side fa-3x" style="margin-bottom: 2.5rem;color:#1E90FF;"></i>
+                <h3>chauffeurs professionels et ponctuels</h3>
+                <div class="decorator"></div>
+            </div>
+            <div class="service">
+                <i class="fa-solid fa-clock fa-3x" style="margin-bottom: 2.5rem;color:#1E90FF;"></i>
+                <h3>Service disponible 24h</h3>
+            </div>
+            <div class="service">
+                <i class="fa-solid fa-hand-pointer fa-3x" style="margin-bottom: 2.5rem;color:#1E90FF;"></i>
+                <h3>Réservation simple et Rapide</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+
+    <section id="about">
+        <div class="header">
+            About us
+        </div>
+        <div class="wrapper">
+            <div class="illustration">
+                <img src="images/illustration.png" alt="illustration" />
+            </div>
+            <div class="description">
+                <h1>Qui sommes nous</h1>
+                <p>
+                    Nous sommes une société de Transport qui vous garantie un service de VTC professionel et
+                    confortable.
+                    Nous sommes disponible 7/7 et 24/24 pour vous assurer un service rapide et efficase .
+                    Dans le cas d'une urgence, il est parfaitement possible de demander un taxi avec chauffeur sans
+                    réservation. Pour ce faire vous pouvez immédiatement nous télephoner au 06 44 11 72 49 et 06 35
+                    59 92 61.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+
+    <section id="contact">
+        <div class="header">
+            <h1>Contact</h1>
+        </div>
+        <div class="container">
+            <form>
+                <div>
+                    <input type="text" placeholder="Enter name..." />
+                    <input type="text" placeholder="Enter object..." />
+                </div>
+                <input type="email" placeholder="Enter email..." />
+                <textarea type="text" placeholder="Enter message..." rows="6"></textarea>
+                <button>Send message</button>
+            </form>
+            <div class="illustration">
+                <img src="./images/contact.png" alt="illustration image" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Button -->
+
+    <button class="btnn asba">
+        <i class="fa-solid fa-angle-up" style="color:white"></i>
+    </button>
+
+    <!-- Alert -->
+
+    <div class="alert hiddenn">
+        <div class="inner">
+            <div class="green">
+                <i class="fas fa-check-circle fa-3x" style="color:white;"></i>
+            </div>
+            <h3>Votre Taxi est bien réservé le chauffeur vous appelerait dans les prochaines 5 mins</h3>
+            <h3>Merci.</h3>
+            <button class="close">OK</button>
+        </div>
+    </div>
+    <div class="error hiddenn">
+        <div class="inner err">
+            <div class="red">
+                <i class="fas fa-times-circle fa-3x" style="color:white;"></i>
+            </div>
+            <h3 class="header err"></h3>
+            <button class="close err">Valider</button>
+        </div>
+    </div>
+</body>
+
+</html>
